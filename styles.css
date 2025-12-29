@@ -116,8 +116,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(10, 10, 10, 0.5);
-    backdrop-filter: blur(3px);
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(5px);
     z-index: 1;
 }
 
@@ -139,11 +139,12 @@ body {
 }
 
 .hero-logo {
-    height: 150px;
+    height: 350px;
     width: auto;
-    margin-bottom: 2rem;
-    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+    margin-bottom: 3rem;
+    filter: drop-shadow(0 20px 50px rgba(255, 255, 255, 0.2)) brightness(1.1);
     animation: floating 3s ease-in-out infinite;
+    transition: all 0.3s ease;
 }
 
 @keyframes floating {
@@ -157,10 +158,10 @@ body {
 
 .studio-name {
     font-family: 'Inter', sans-serif;
-    font-size: 3rem;
-    font-weight: 600;
+    font-size: 2.5rem;
+    font-weight: 500;
     margin-bottom: 1.5rem;
-    letter-spacing: -1px;
+    letter-spacing: 2px;
     color: var(--text-primary);
 }
 
@@ -411,12 +412,12 @@ body {
     }
 
     .hero-logo {
-        height: 100px;
-        margin-bottom: 1.5rem;
+        height: 200px;
+        margin-bottom: 2rem;
     }
 
     .studio-name {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     .tagline {
@@ -459,13 +460,13 @@ body {
     }
 
     .hero-logo {
-        height: 80px;
-        margin-bottom: 1rem;
+        height: 150px;
+        margin-bottom: 1.5rem;
     }
 
     .studio-name {
         font-size: 1.5rem;
-        letter-spacing: -0.5px;
+        letter-spacing: 1px;
     }
 
     .nav-menu {
