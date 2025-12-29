@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vicho Studio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="vicenta.jpeg" alt="Vicenta Studio">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#games">Juegos</a></li>
+                <li><a href="#about">Acerca de</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="hero">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="web gameplay.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <img src="vicenta.jpeg" alt="Vicho Studio" class="hero-logo">
+                <h1 class="studio-name">Vicho Studio</h1>
+                <p class="tagline">Crafting experiences that challenge the mind</p>
+            </div>
+        </section>
+
+        <section id="games" class="games-section">
+            <div class="container">
+                <h2 class="section-title">Our Games</h2>
+
+                <div class="game-card">
+                    <div class="game-image">
+                        <img src="bannergame.jpeg" alt="Tempera Game" class="game-banner">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">Tempera</h3>
+                        <p class="game-description">
+                            Un bullet hell minimalista que explora las profundidades de la mente humana.
+                            Enfrenta tus pensamientos en una experiencia única diseñada
+                            para móviles.
+                        </p>
+                        <div class="game-tags">
+                            <span class="tag">Bullet Hell</span>
+                            <span class="tag">Minimalista</span>
+                            <span class="tag">Filosofía</span>
+                        </div>
+                        <a href="tempera.html" class="game-link">Descubre más →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2 class="section-title">Acerca de</h2>
+                <div class="about-content">
+                    <p>
+                        Vicho Studio es un estudio indie dedicado a crear experiencias casuales
+                        que desafían la mente.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Vicho Studio. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
