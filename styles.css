@@ -314,6 +314,36 @@ body {
     color: var(--bg-dark);
 }
 
+.game-actions {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.play-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: var(--accent);
+    color: var(--bg-dark);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: lowercase;
+    transition: all 0.3s ease;
+    border: 2px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+}
+
+.play-button:hover {
+    background: transparent;
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+}
+
 .game-link {
     display: inline-block;
     color: var(--accent);
@@ -408,6 +438,17 @@ body {
 
     .game-title-overlay {
         font-size: 2rem;
+    }
+
+    .play-button {
+        padding: 0.9rem 2rem;
+        font-size: 0.95rem;
+    }
+
+    .game-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
     }
 }
 
