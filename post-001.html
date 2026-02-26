@@ -19,7 +19,7 @@
   <ul class="nav-r">
     <li><a href="index.html#games">Juegos</a></li>
     <li><a href="index.html#about">Estudio</a></li>
-    <li><a href="blog.html" class="active">Notas</a></li>
+    <li><a href="blog.html" class="active">Blog</a></li>
     <li><button class="theme-toggle" id="themeBtn">● Dark</button></li>
   </ul>
 </nav>
@@ -72,21 +72,22 @@
 
   <p>
     Los únicos shaders que conocía eran los de Minecraft. Investigando descubrí 
-    <strong>The Book of Shaders</strong>, que fue mi principal guía para aprender.
+    <strong>The Book of Shaders</strong> de Patricio Gonzalez Vivo y Jen Lowe, 
+    que fue mi principal guía para aprender.
   </p>
 
   <p>
-    Luego me pregunté qué estilo artístico sería interesante ver en un videojuego, 
-    y ahí se me ocurrió imitar a <strong>Claude Monet</strong>.
+    Luego me pregunté: ¿qué estilo artístico sería interesante ver en un videojuego? 
+    Y ahí es donde se me ocurrió imitar a <strong>Claude Monet</strong>.
   </p>
 
   <p>
-    Cuando era pequeño mis padres compraron unas revistas de pintores que venían 
-    en el diario y una era de Monet. Quedé fascinado con su arte, por eso lo elegí.
+    Cuando pequeño mis padres compraron revistas de pintores que venían en el diario 
+    y una era de Monet. Quedé muy fascinado con su arte, por eso lo elegí.
   </p>
 
   <div class="img-block">
-    <img src="imgs/shortlike.png" alt="A Short Hike">
+    <img src="imgs/shortkike.png" alt="A Short Hike">
     <p class="img-caption">A Short Hike — inspiración visual</p>
   </div>
 </div>
@@ -99,13 +100,13 @@
   <h2 class="section-title">Antes del código,<br><em>las pinturas.</em></h2>
 
   <p>
-    Lo primero que noté fueron los reflejos del agua en La Grenouillère. 
-    También cómo puede dibujar personas con tan pocos trazos.
+    Lo primero que noté fueron los reflejos del agua en La Grenouillère.
+    Son muy bonitos. La manera en que dibuja personas con tan pocos trazos es genial.
   </p>
 
   <p>
-    Otra cosa interesante es cómo dibuja las nubes. 
-    Esas formas suaves pero llenas de color tenían que estar en el videojuego.
+    Otra cosa interesante es cómo dibuja las nubes.
+    Estas cosas sí o sí debían estar en el videojuego.
   </p>
 
   <div class="img-block">
@@ -125,19 +126,133 @@
 
 <div class="divider"></div>
 
+<!-- 03 -->
+<div class="section reveal">
+  <p class="section-label">03 — Primeros shaders</p>
+  <h2 class="section-title">Mi primer shader<br><em>era un rectángulo azul.</em></h2>
+
+  <p>
+    Mi primera experiencia programando shaders fue en thebookofshaders.com.
+    El “Hola Mundo” básicamente pintaba todos los píxeles con un color sólido.
+  </p>
+
+  <div class="code-block">
+<code>
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform float u_time;
+
+void main() {
+    gl_FragColor = vec4(1.0,0.0,1.0,1.0);
+}
+</code>
+    <p class="code-caption">
+      Este script pinta todos los píxeles del objeto con un color sólido.
+    </p>
+  </div>
+
+  <p>
+    Lo más difícil fue entender la matemática. Sentí que algo funcionó
+    cuando logré animar un gradiente usando la función seno sobre el tiempo.
+  </p>
+
+  <p>
+    Definitivamente lo más confuso fueron las matrices en GLSL.
+    Me hubiera ayudado haber prestado más atención en clases.
+  </p>
+</div>
+
+<div class="divider"></div>
+
 <!-- 04 -->
 <div class="section reveal">
   <p class="section-label">04 — El algoritmo</p>
   <h2 class="section-title">El Kuwahara filter,<br><em>o cómo pintar sin pintar.</em></h2>
 
+  <p>
+    El filtro Kuwahara suaviza áreas uniformes sin destruir bordes.
+    Para cada píxel:
+  </p>
+
+  <ol>
+    <li>Mira un cuadrado alrededor.</li>
+    <li>Lo divide en 4 partes.</li>
+    <li>Elige la parte más uniforme.</li>
+    <li>Usa su color promedio.</li>
+  </ol>
+
+  <p>
+    Funciona porque imita cómo el ojo humano simplifica una escena.
+    No copia la foto, copia la percepción.
+  </p>
+
   <div class="img-block">
-    <img src="imgs/londonshader.png" alt="Resultado con shader">
-    <p class="img-caption">Resultado con filtro aplicado</p>
+    <img src="imgs/londonshader.png" alt="Resultado shader">
+    <p class="img-caption">Resultado en Shadertoy</p>
   </div>
 
   <div class="img-block">
-    <img src="imgs/london.png" alt="Imagen original">
+    <img src="imgs/london.png" alt="Original">
     <p class="img-caption">Imagen original</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 05 -->
+<div class="section reveal">
+  <p class="section-label">05 — Los toques finales</p>
+  <h2 class="section-title">Vibración de color<br><em>y un poco de bloom.</em></h2>
+
+  <p>
+    Kuwahara solo suaviza. No agrega textura ni energía visual.
+    Se veía como una foto filtrada, no como pintura real.
+  </p>
+
+  <p>
+    El ruido introduce micro-variaciones, como el grano de la pintura,
+    y el bloom ayuda a que la luz se sienta más viva.
+  </p>
+</div>
+
+<div class="divider"></div>
+
+<!-- 06 -->
+<div class="section reveal">
+  <p class="section-label">06 — En Godot</p>
+  <h2 class="section-title">Portarlo a Godot<br><em>fue más fácil de lo esperado.</em></h2>
+
+  <p>
+    En Shadertoy usas mainImage, iResolution e iChannel0.
+    En Godot usas SCREEN_UV, COLOR y el pipeline del engine.
+  </p>
+
+  <p>
+    Fue más práctico de lo que esperaba y verlo funcionando en tiempo real
+    dentro de una escena 3D fue increíble.
+  </p>
+</div>
+
+<div class="divider"></div>
+
+<!-- 07 -->
+<div class="section reveal">
+  <p class="section-label">07 — Lo que me llevo</p>
+  <h2 class="section-title">Aprendí a hacer shaders.<br><em>Y otras cosas.</em></h2>
+
+  <p>
+    Después de pasar por esto entendí que se puede hacer bastante arte con matemáticas.
+    Cambió mi forma de ver los videojuegos y la pintura.
+  </p>
+
+  <p>
+    Ahora sigue intentar hacer un juego completo con esto.
+  </p>
+
+  <div class="post-quote">
+    <p>Quería un filtro impresionista. Terminé aprendiendo a mirar la luz.</p>
   </div>
 </div>
 
@@ -153,24 +268,20 @@
   <h2 class="section-title">Why on earth<br><em>did I want to do this?</em></h2>
 
   <p>
-    One day, looking for inspiration to create new games, I saw <strong>A Short Hike</strong>. 
-    Its art style really stuck with me. It's a 3D world with a pixelated shader on top, 
-    and I thought: WOW, what is this? How is this made? So I started researching.
+    One day, looking for inspiration to create new games, I saw <strong>A Short Hike</strong>.
+    Its art style really stuck with me. It's a 3D world with a pixelated shader on top,
+    and I thought: WOW, what is this? How is this made?
   </p>
 
   <p>
-    The only shaders I knew were Minecraft shaders. While researching, I discovered 
-    <strong>The Book of Shaders</strong>, which became my main learning guide.
+    The only shaders I knew were Minecraft shaders.
+    While researching, I discovered <strong>The Book of Shaders</strong>,
+    which became my main learning guide.
   </p>
 
   <p>
-    Then I asked myself: what artistic style would be interesting in a video game? 
+    Then I asked myself what artistic style would be interesting in a game.
     That’s when I decided to imitate <strong>Claude Monet</strong>.
-  </p>
-
-  <p>
-    When I was younger, my parents bought painting magazines that came with the newspaper. 
-    One of them was about Monet. I was fascinated by his art, so I chose him.
   </p>
 
   <div class="img-block">
@@ -187,23 +298,21 @@
   <h2 class="section-title">Before the code,<br><em>the paintings.</em></h2>
 
   <p>
-    The first thing I noticed was the water reflections in La Grenouillère, 
+    The first thing I noticed was the water reflections in La Grenouillère
     and how he could draw people with so few brush strokes.
   </p>
 
   <p>
-    I was also fascinated by the way he paints clouds — soft shapes full of color. 
-    Those absolutely had to be in the game.
+    I was also fascinated by the way he paints clouds —
+    soft shapes full of color.
   </p>
 
   <div class="img-block">
     <img src="imgs/monet1.png" alt="La Grenouillère">
-    <p class="img-caption">La Grenouillère, 1869 — Claude Monet</p>
   </div>
 
   <div class="img-block">
     <img src="imgs/monet2.png" alt="Woman with a Parasol">
-    <p class="img-caption">Woman with a Parasol, 1875 — Claude Monet</p>
   </div>
 
   <div class="post-quote">
@@ -213,20 +322,15 @@
 
 <div class="divider"></div>
 
-<!-- 04 -->
+<!-- 03–07 resumidas coherentes -->
 <div class="section reveal">
-  <p class="section-label">04 — The algorithm</p>
-  <h2 class="section-title">The Kuwahara filter,<br><em>or how to paint without painting.</em></h2>
-
-  <div class="img-block">
-    <img src="imgs/londonshader.png" alt="Shader result">
-    <p class="img-caption">Result with shader applied</p>
-  </div>
-
-  <div class="img-block">
-    <img src="imgs/london.png" alt="Original image">
-    <p class="img-caption">Original image</p>
-  </div>
+  <p class="section-label">03–07</p>
+  <p>
+    I learned GLSL, implemented the Kuwahara filter,
+    added color vibration and bloom, and ported everything to Godot.
+    In the end, I realized that math can create art —
+    and that changed how I see games.
+  </p>
 </div>
 
 </article>
