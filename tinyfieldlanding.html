@@ -1,105 +1,109 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TinyField - Vicho Studio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="tinyfield.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TinyField - Vicho Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/game.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <a href="index.html"><img src="vicenta.jpeg" alt="Vicenta Studio"></a>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#games">Games</a></li>
-                <li><a href="index.html#about">About</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <main class="tinyfield-page">
-        <!-- Hero -->
-        <section class="game-hero">
-            <div class="hero-background">
-                <div class="animated-bg"></div>
-            </div>
-            <div class="hero-content">
-                <h1 class="game-logo">TINYFIELD</h1>
-                <p class="game-subtitle">Cozy Survival • Mobile, PC, Switch • 2026</p>
-                <a href="tinyfield/tinyfield.html" class="play-button-hero">play tinyfield!</a>
-            </div>
-        </section>
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
 
-        <!-- Game Visual -->
-        <section class="game-visual">
-            <div class="visual-container">
-                <div class="game-screen">
-                    <div class="screen-content">
-                        <img src="tinyfield/tinyfield.png" alt="TinyField Gameplay" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Vicho Studio</a>
+  <ul class="nav-r">
+    <li><a href="index.html#games">Juegos</a></li>
+    <li><a href="index.html#about">Estudio</a></li>
+    <li><a href="blog.html">Notas</a></li>
+    <li><button class="theme-toggle" id="themeBtn">● Dark</button></li>
+  </ul>
+</nav>
 
-        <!-- About Game -->
-        <section class="game-about">
-            <div class="container-narrow">
-                <p class="game-intro">
-                    TinyField es un viaje de calma y descubrimiento personal.
-                    Deja atrás la ciudad y aprende a vivir con los ritmos del campo
-                    en una experiencia de supervivencia cozy y relajante.
-                </p>
-                <p class="game-intro">
-                    No hay enemigos ni peligro real, solo ciclos naturales, relaciones,
-                    estaciones y crecimiento interior. El objetivo no es sobrevivir,
-                    sino florecer.
-                </p>
-            </div>
-        </section>
+<!-- HERO -->
+<section id="hero">
+  <h1 class="hero-title">TINYFIELD</h1>
 
-        <!-- Info Grid -->
-        <section class="game-info-section">
-            <div class="container">
-                <div class="info-grid">
-                    <div class="info-item">
-                        <h4>Plataforma</h4>
-                        <p>Mobile, PC, Switch</p>
-                    </div>
-                    <div class="info-item">
-                        <h4>Género</h4>
-                        <p>Cozy Survival</p>
-                    </div>
-                    <div class="info-item">
-                        <h4>Jugadores</h4>
-                        <p>1 Jugador</p>
-                    </div>
-                    <div class="info-item">
-                        <h4>Estado</h4>
-                        <p>En Desarrollo</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <div class="hero-meta meta-tl">
+    <div class="lbl">Género</div>
+    <div class="val">Cozy Survival</div>
+  </div>
+  <div class="hero-meta meta-tr">
+    <div class="lbl">Plataforma</div>
+    <div class="val">Multi</div>
+  </div>
 
-        <!-- Coming Soon -->
-        <section class="coming-soon">
-            <div class="container-narrow">
-                <h2>Próximamente</h2>
-            </div>
-        </section>
-    </main>
+  <p class="hero-tagline">Un viaje de calma y descubrimiento personal.</p>
+  <div class="scroll-drip"></div>
+</section>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Vicho Studio. All rights reserved.</p>
-        </div>
-    </footer>
+<!-- STRIP -->
+<div class="strip">
+  <span>002 — TinyField</span>
+  <span>Cozy Survival · Sandbox</span>
+  <span>Mobile · PC · Switch</span>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section">
+  <div class="about-l reveal">
+    <div>
+      <p class="sec-lbl">Acerca del juego</p>
+      <h2 class="about-title">Una vida<br><em>en el campo.</em></h2>
+    </div>
+    <p class="about-year">TinyField · 2026</p>
+  </div>
+  <div class="about-r reveal">
+    <div>
+      <p class="about-body">
+        TinyField es un <strong>viaje de calma y descubrimiento personal.</strong> Deja atrás la ciudad para construir una vida sencilla en el campo, cultivar y crear vínculos en un entorno natural procedural.
+      </p>
+      <p class="about-body">
+        No hay enemigos ni peligro real, solo ciclos naturales, relaciones, estaciones y crecimiento interior. <strong>El objetivo no es sobrevivir, sino florecer.</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- INFO GRID -->
+<section class="info-grid-section reveal">
+  <div class="info-grid">
+    <div class="info-item">
+      <h4>Plataforma</h4>
+      <p>Mobile, PC, Switch</p>
+    </div>
+    <div class="info-item">
+      <h4>Género</h4>
+      <p>Cozy Survival</p>
+    </div>
+    <div class="info-item">
+      <h4>Jugadores</h4>
+      <p>1 Jugador</p>
+    </div>
+    <div class="info-item">
+      <h4>Estado</h4>
+      <p>En Desarrollo</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal">
+  <h2 class="cta-title">Juega<br><em>TinyField</em></h2>
+  <a href="tinyfield/tinyfield.html" class="btn-solid">Jugar ahora</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Vicho Studio</span>
+  <span class="f-r">Todos los derechos reservados</span>
+</footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>

@@ -1,101 +1,104 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tempera - Vicho Studio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="tempera.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tempera - Vicho Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/game.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <a href="index.html"><img src="vicenta.jpeg" alt="Vicenta Studio"></a>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#games">Games</a></li>
-                <li><a href="index.html#about">About</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <main class="tempera-page">
-        <!-- Hero -->
-        <section class="game-hero">
-            <div class="hero-background">
-                <div class="animated-bg"></div>
-            </div>
-            <div class="hero-content">
-                <h1 class="game-logo">TEMPERA</h1>
-                <p class="game-subtitle">Bullet Hell • Mobile • 2026</p>
-                <a href="https://asumas.itch.io/tempera" class="play-button-hero" target="_blank" rel="noopener noreferrer">play tempera!</a>
-            </div>
-        </section>
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
 
-        <!-- Game Visual -->
-        <section class="game-visual">
-            <div class="visual-container">
-                <div class="game-screen">
-                    <div class="screen-content">
-                        <video class="gameplay-video" autoplay muted loop playsinline>
-                            <source src="phonegameplay.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Vicho Studio</a>
+  <ul class="nav-r">
+    <li><a href="index.html#games">Juegos</a></li>
+    <li><a href="index.html#about">Estudio</a></li>
+    <li><a href="blog.html">Notas</a></li>
+    <li><button class="theme-toggle" id="themeBtn">● Dark</button></li>
+  </ul>
+</nav>
 
-        <!-- About Game -->
-        <section class="game-about">
-            <div class="container-narrow">
-                <p class="game-intro">
-                    Tempera es un bullet hell minimalista donde cada patrón de balas
-                    representa un aspecto de la mente humana.
-                </p>
-            </div>
-        </section>
+<!-- HERO -->
+<section id="hero">
+  <h1 class="hero-title">TEMPERA</h1>
 
-        <!-- Info Grid -->
-        <section class="game-info-section">
-            <div class="container">
-                <div class="info-grid">
-                    <div class="info-item">
-                        <h4>Plataforma</h4>
-                        <p>iOS & Android</p>
-                    </div>
-                    <div class="info-item">
-                        <h4>Género</h4>
-                        <p>Bullet Hell</p>
-                    </div>
-                    <div class="info-item">
-                        <h4>Jugadores</h4>
-                        <p>1 Jugador</p>
-                    </div>
-                    <div class="info-item">
-                        <h4>Estado</h4>
-                        <p>En Desarrollo</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <div class="hero-meta meta-tl">
+    <div class="lbl">Género</div>
+    <div class="val">Bullet Hell</div>
+  </div>
+  <div class="hero-meta meta-tr">
+    <div class="lbl">Plataforma</div>
+    <div class="val">Mobile</div>
+  </div>
 
-        <!-- Coming Soon -->
-        <section class="coming-soon">
-            <div class="container-narrow">
-                <h2>Próximamente</h2>
-            </div>
-        </section>
-    </main>
+  <p class="hero-tagline">Un viaje a través de la mente humana.</p>
+  <div class="scroll-drip"></div>
+</section>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Vicho Studio. All rights reserved.</p>
-        </div>
-    </footer>
+<!-- STRIP -->
+<div class="strip">
+  <span>001 — Tempera</span>
+  <span>Bullet Hell · Minimalista</span>
+  <span>iOS & Android</span>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section">
+  <div class="about-l reveal">
+    <div>
+      <p class="sec-lbl">Acerca del juego</p>
+      <h2 class="about-title">Un bullet hell<br><em>filosófico.</em></h2>
+    </div>
+    <p class="about-year">Tempera · 2026</p>
+  </div>
+  <div class="about-r reveal">
+    <p class="about-body">
+      Tempera es un <strong>bullet hell minimalista</strong> donde cada patrón de balas representa un aspecto de la mente humana. Una experiencia única diseñada para móviles que explora las profundidades del pensamiento y la percepción.
+    </p>
+  </div>
+</section>
+
+<!-- INFO GRID -->
+<section class="info-grid-section reveal">
+  <div class="info-grid">
+    <div class="info-item">
+      <h4>Plataforma</h4>
+      <p>iOS & Android</p>
+    </div>
+    <div class="info-item">
+      <h4>Género</h4>
+      <p>Bullet Hell</p>
+    </div>
+    <div class="info-item">
+      <h4>Jugadores</h4>
+      <p>1 Jugador</p>
+    </div>
+    <div class="info-item">
+      <h4>Estado</h4>
+      <p>En Desarrollo</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal">
+  <h2 class="cta-title">Juega<br><em>Tempera</em></h2>
+  <a href="https://asumas.itch.io/tempera" class="btn-solid" target="_blank" rel="noopener noreferrer">Jugar ahora</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Vicho Studio</span>
+  <span class="f-r">Todos los derechos reservados</span>
+</footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>

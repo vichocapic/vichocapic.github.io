@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>001 — Aprendiendo shaders desde cero · Vicho Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/post.css">
+</head>
+<body>
+
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Vicho Studio</a>
+  <ul class="nav-r">
+    <li><a href="index.html#games">Juegos</a></li>
+    <li><a href="index.html#about">Estudio</a></li>
+    <li><a href="blog.html" class="active">Notas</a></li>
+    <li><button class="theme-toggle" id="themeBtn">● Dark</button></li>
+  </ul>
+</nav>
+
+<header class="post-header">
+  <div class="post-eyebrow">
+    <span>Nota 001</span><span class="sep">/</span>
+    <span>Feb 2026</span><span class="sep">/</span>
+    <span>Shaders & Arte</span>
+  </div>
+  <h1 class="post-title">
+    Aprendiendo shaders<br><em>desde cero.</em>
+  </h1>
+  <div class="post-header-bottom">
+    <div>
+      <div class="post-tags">
+        <span class="post-tag">GLSL</span>
+        <span class="post-tag">Godot 4</span>
+        <span class="post-tag">Monet</span>
+        <span class="post-tag">Matemáticas</span>
+      </div>
+      <p class="post-intro">Quería un filtro impresionista para mi juego y terminé sacando un  doctorado en matemáticas (ok no)</p>
+    </div>
+    <p class="post-read-time">~8 min de lectura</p>
+  </div>
+</header>
+
+<div class="strip">
+  <span>Vicho Studio</span><span>Nota 001</span><span>Feb 2026</span>
+</div>
+
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- ══════ ESPAÑOL ══════ -->
+<article id="artEs" class="visible">
+
+<!-- 01 -->
+<div class="section reveal">
+  <p class="section-label">01 — El origen</p>
+  <h2 class="section-title">¿Por qué rayos<br><em>quería hacer esto?</em></h2>
+
+  <p>
+    Un día buscando inspiración para crear nuevos juegos vi <strong>A Short Hike</strong> 
+    y me dejó muy marcado su arte. Es un mundo 3D pero con un shader pixelado encima 
+    y dije: WOW ¿qué es esto? ¿cómo se hace? y me puse a investigar.
+  </p>
+
+  <p>
+    Los únicos shaders que conocía eran los de Minecraft. Investigando descubrí 
+    <strong>The Book of Shaders</strong>, que fue mi principal guía para aprender.
+  </p>
+
+  <p>
+    Luego me pregunté qué estilo artístico sería interesante ver en un videojuego, 
+    y ahí se me ocurrió imitar a <strong>Claude Monet</strong>.
+  </p>
+
+  <p>
+    Cuando era pequeño mis padres compraron unas revistas de pintores que venían 
+    en el diario y una era de Monet. Quedé fascinado con su arte, por eso lo elegí.
+  </p>
+
+  <div class="img-block">
+    <img src="imgs/shortlike.png" alt="A Short Hike">
+    <p class="img-caption">A Short Hike — inspiración visual</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 02 -->
+<div class="section reveal">
+  <p class="section-label">02 — Estudiando a Monet</p>
+  <h2 class="section-title">Antes del código,<br><em>las pinturas.</em></h2>
+
+  <p>
+    Lo primero que noté fueron los reflejos del agua en La Grenouillère. 
+    También cómo puede dibujar personas con tan pocos trazos.
+  </p>
+
+  <p>
+    Otra cosa interesante es cómo dibuja las nubes. 
+    Esas formas suaves pero llenas de color tenían que estar en el videojuego.
+  </p>
+
+  <div class="img-block">
+    <img src="imgs/monet1.png" alt="La Grenouillère">
+    <p class="img-caption">La Grenouillère, 1869 — Claude Monet</p>
+  </div>
+
+  <div class="img-block">
+    <img src="imgs/monet2.png" alt="Woman with a Parasol">
+    <p class="img-caption">Woman with a Parasol, 1875 — Claude Monet</p>
+  </div>
+
+  <div class="post-quote">
+    <p>Monet no pintaba detalles. Pintaba cómo se siente la luz.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 04 -->
+<div class="section reveal">
+  <p class="section-label">04 — El algoritmo</p>
+  <h2 class="section-title">El Kuwahara filter,<br><em>o cómo pintar sin pintar.</em></h2>
+
+  <div class="img-block">
+    <img src="imgs/londonshader.png" alt="Resultado con shader">
+    <p class="img-caption">Resultado con filtro aplicado</p>
+  </div>
+
+  <div class="img-block">
+    <img src="imgs/london.png" alt="Imagen original">
+    <p class="img-caption">Imagen original</p>
+  </div>
+</div>
+
+</article>
+
+
+<!-- ══════ ENGLISH ══════ -->
+<article id="artEn">
+
+<!-- 01 -->
+<div class="section reveal">
+  <p class="section-label">01 — The origin</p>
+  <h2 class="section-title">Why on earth<br><em>did I want to do this?</em></h2>
+
+  <p>
+    One day, looking for inspiration to create new games, I saw <strong>A Short Hike</strong>. 
+    Its art style really stuck with me. It's a 3D world with a pixelated shader on top, 
+    and I thought: WOW, what is this? How is this made? So I started researching.
+  </p>
+
+  <p>
+    The only shaders I knew were Minecraft shaders. While researching, I discovered 
+    <strong>The Book of Shaders</strong>, which became my main learning guide.
+  </p>
+
+  <p>
+    Then I asked myself: what artistic style would be interesting in a video game? 
+    That’s when I decided to imitate <strong>Claude Monet</strong>.
+  </p>
+
+  <p>
+    When I was younger, my parents bought painting magazines that came with the newspaper. 
+    One of them was about Monet. I was fascinated by his art, so I chose him.
+  </p>
+
+  <div class="img-block">
+    <img src="imgs/shortlike.png" alt="A Short Hike">
+    <p class="img-caption">A Short Hike — visual inspiration</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 02 -->
+<div class="section reveal">
+  <p class="section-label">02 — Studying Monet</p>
+  <h2 class="section-title">Before the code,<br><em>the paintings.</em></h2>
+
+  <p>
+    The first thing I noticed was the water reflections in La Grenouillère, 
+    and how he could draw people with so few brush strokes.
+  </p>
+
+  <p>
+    I was also fascinated by the way he paints clouds — soft shapes full of color. 
+    Those absolutely had to be in the game.
+  </p>
+
+  <div class="img-block">
+    <img src="imgs/monet1.png" alt="La Grenouillère">
+    <p class="img-caption">La Grenouillère, 1869 — Claude Monet</p>
+  </div>
+
+  <div class="img-block">
+    <img src="imgs/monet2.png" alt="Woman with a Parasol">
+    <p class="img-caption">Woman with a Parasol, 1875 — Claude Monet</p>
+  </div>
+
+  <div class="post-quote">
+    <p>Monet didn’t paint details. He painted how light feels.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 04 -->
+<div class="section reveal">
+  <p class="section-label">04 — The algorithm</p>
+  <h2 class="section-title">The Kuwahara filter,<br><em>or how to paint without painting.</em></h2>
+
+  <div class="img-block">
+    <img src="imgs/londonshader.png" alt="Shader result">
+    <p class="img-caption">Result with shader applied</p>
+  </div>
+
+  <div class="img-block">
+    <img src="imgs/london.png" alt="Original image">
+    <p class="img-caption">Original image</p>
+  </div>
+</div>
+
+</article>
+<div class="post-nav">
+  <a href="blog.html" class="post-nav-back">← Volver a Notas</a>
+  <span class="post-nav-info">001 / Feb 2026</span>
+</div>
+
+<footer>
+  <span>© 2026 Vicho Studio</span>
+  <span class="f-c">Nota 001</span>
+  <span class="f-r">Todos los derechos reservados</span>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/post.js"></script>
+</body>
+</html>
