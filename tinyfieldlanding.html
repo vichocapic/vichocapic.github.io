@@ -1,109 +1,470 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TinyField - Vicho Studio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/game.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Aprendiendo shaders desde cero · Vicho Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="css/post.css"/>
 </head>
 <body>
 
-<div id="cur-dot"></div>
-<div id="cur-ring"></div>
+  <!-- CURSOR -->
+  <div id="cur-dot"></div>
+  <div id="cur-ring"></div>
 
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-logo">Vicho Studio</a>
-  <ul class="nav-r">
-    <li><a href="index.html#games">Juegos</a></li>
-    <li><a href="index.html#about">Estudio</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><button class="theme-toggle" id="themeBtn">● Dark</button></li>
-  </ul>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="index.html">Vicho Studio</a>
+    <ul class="nav-r">
+      <li><a href="index.html#games">Juegos</a></li>
+      <li><a href="index.html#about">Estudio</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><button class="theme-toggle" id="themeBtn">● Dark</button></li>
+    </ul>
+  </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <h1 class="hero-title">TINYFIELD</h1>
+  <!-- POST HEADER -->
+  <header class="post-header">
+    <div class="post-eyebrow">
+      <span>Nota 001</span>
+      <span class="sep">/</span>
+      <span>Feb 2026</span>
+      <span class="sep">/</span>
+      <span>Shaders &amp; Arte</span>
+    </div>
 
-  <div class="hero-meta meta-tl">
-    <div class="lbl">Género</div>
-    <div class="val">Cozy Survival</div>
+    <h1 class="post-title">Aprendiendo shaders <em>desde cero.</em></h1>
+
+    <div class="post-header-bottom">
+      <div>
+        <div class="post-tags">
+          <span class="post-tag">GLSL</span>
+          <span class="post-tag">Godot 4</span>
+          <span class="post-tag">Monet</span>
+          <span class="post-tag">Matemáticas</span>
+        </div>
+        <p class="post-intro">Quería un filtro impresionista para mi juego y terminé sacando un doctorado en matemáticas (ok no)</p>
+      </div>
+      <div class="post-read-time">~8 min de lectura</div>
+    </div>
+  </header>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <span>Vicho Studio</span>
+    <span>Nota 001 / Feb 2026</span>
+    <span>ES &nbsp;·&nbsp; EN</span>
   </div>
-  <div class="hero-meta meta-tr">
-    <div class="lbl">Plataforma</div>
-    <div class="val">Multi</div>
+
+  <!-- LANG BAR -->
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
+    <button class="lang-btn" onclick="setLang('en',this)">EN</button>
   </div>
 
-  <p class="hero-tagline">Un viaje de calma y descubrimiento personal.</p>
-  <div class="scroll-drip"></div>
-</section>
+  <!-- ═══════════ ESPAÑOL ═══════════ -->
+  <article id="lang-es" class="visible">
 
-<!-- STRIP -->
-<div class="strip">
-  <span>002 — TinyField</span>
-  <span>Cozy Survival · Sandbox</span>
-  <span>Mobile · PC · Switch</span>
-</div>
-
-<!-- ABOUT -->
-<section class="about-section">
-  <div class="about-l reveal">
-    <div>
-      <p class="sec-lbl">Acerca del juego</p>
-      <h2 class="about-title">Una vida<br><em>en el campo.</em></h2>
+    <!-- 01 -->
+    <div class="section reveal">
+      <div class="section-label">01 — El origen</div>
+      <h2 class="section-title">¿Por qué rayos <em>quería hacer esto?</em></h2>
+      <p>Un día buscando inspiración para crear nuevos juegos vi este juego que se llama <strong>A Short Hike</strong> y me dejó muy marcado su arte. Es un mundo 3D pero con un shader pixelado encima y dije: WOW ¿qué es esto? ¿cómo se hace? y me puse a investigar.</p>
+      <p>Los únicos shaders que conocía eran los de Minecraft, que para la mayoría de gente es una forma de modificar Minecraft para que tenga efectos visuales generalmente de realismo en el juego, aunque también hay otros que tienen otros efectos que no son necesariamente realistas.</p>
+      <p>Entonces investigando descubrí la biblia de los shaders (por lo menos para mí), <strong>The Book of Shaders</strong> de Patricio Gonzalez Vivo y Jen Lowe, que fue mi principal guía para aprender. Me puse a pensar: ¿qué estilo artístico sería interesante ver en un videojuego? Y ahí es donde se me ocurrió imitar a <strong>Claude Monet</strong>.</p>
+      <p>Cuando pequeño mis padres compraron unas revistas de pintores que venían en el diario y una de esas era de Monet. Quedé muy fascinado con su arte y por eso lo elegí a él y no a otro estilo.</p>
+      <div class="img-block">
+        <img src="imgs/shortkike.png" alt="A Short Hike" style="width:100%;display:block;"/>
+        <div class="img-caption">A Short Hike — adamgryu</div>
+      </div>
     </div>
-    <p class="about-year">TinyField · 2026</p>
+
+    <!-- 02 -->
+    <div class="section reveal">
+      <div class="section-label">02 — Estudiando a Monet</div>
+      <h2 class="section-title">Antes del código, <em>las pinturas.</em></h2>
+      <p>Lo primero que noté en las pinturas de Monet fueron los reflejos del agua en <em>Bathers at La Grenouillère</em>. Son muy bonitos. La manera en que puede dibujar personas en tan pocos trazos es genial.</p>
+      <div class="img-block">
+        <img src="imgs/monet1.png" alt="La Grenouillère" style="width:100%;display:block;"/>
+        <div class="img-caption">La Grenouillère, 1869 — Claude Monet</div>
+      </div>
+      <p>Otra cosa que noté interesante es la forma en la que Monet dibuja las nubes. Estas cosas sí o sí deben estar en el videojuego.</p>
+      <div class="img-block">
+        <img src="imgs/monet2.png" alt="Woman with a Parasol" style="width:100%;display:block;"/>
+        <div class="img-caption">Woman with a Parasol — Madame Monet and Her Son, 1875 — Claude Monet</div>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="section reveal">
+      <div class="section-label">03 — Primeros shaders</div>
+      <h2 class="section-title">Mi primer shader <em>era un rectángulo azul.</em></h2>
+      <p>Mi primera experiencia programando en shaders (GLSL) fue en <strong>thebookofshaders.com</strong>. El "Hola Mundo" se veía algo así:</p>
+      <div class="code-block">
+        <code>#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform float u_time;
+
+void main() {
+    gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0);
+}</code>
+      </div>
+      <p>Este script pinta todos los píxeles del objeto con un color sólido. Puedes ejecutar este script en <strong>shadertoy.com</strong>, que es un visualizador GLSL.</p>
+      <p>Aprendiendo en el libro de shaders me encontré con mucha matemática avanzada que tuve que estudiar. Sentí que por fin algo funcionó cuando logré hacer una animación de un gradiente de rojo a negro utilizando la función seno sobre el tiempo para que devuelva valores de 0 a 1 suavemente y así disminuir y aumentar la cantidad de rojo en la imagen.</p>
+      <div class="callout">
+        <p>Definitivamente lo más confuso fue cuando empezamos a usar matrices en GLSL. Me hubiera ayudado haber prestado atención en clases jajaja. <em>(bait)</em></p>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="section reveal">
+      <div class="section-label">04 — El algoritmo</div>
+      <h2 class="section-title">El Kuwahara filter, <em>o cómo pintar sin pintar.</em></h2>
+      <p>El filtro Kuwahara suaviza áreas uniformes sin destruir bordes. Para cada píxel sigue 4 pasos:</p>
+      <div class="callout">
+        <p>1. Mira un cuadrado alrededor de ese punto.<br/>
+        2. Divide ese cuadrado en 4 partes.<br/>
+        3. Observa cuál de esas partes es más "uniforme" (más parecida entre sí).<br/>
+        4. Elige esa parte y usa su color promedio.</p>
+      </div>
+      <p>Este algoritmo nos ayuda a transformar una imagen cualquiera a algo parecido a los cuadros de Monet, porque copia cómo simplifica el ojo humano una escena. No solo cómo se ve una foto. La pintura impresionista es precisamente eso: <strong>simplificación controlada</strong>.</p>
+      <p>Este es el código final para Shadertoy:</p>
+      <div class="code-block">
+        <code>#define KERNEL_SIZE 5
+#define VIBRATION 0.04
+#define BLOOM_STRENGTH 0.15
+
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
+{
+    vec2 uv = fragCoord / iResolution.xy;
+    vec2 texel = 1.0 / iResolution.xy;
+    float n = float((KERNEL_SIZE + 1) * (KERNEL_SIZE + 1));
+
+    vec3 mean[4];
+    vec3 sigma[4];
+    for (int k = 0; k &lt; 4; k++) {
+        mean[k] = vec3(0.0);
+        sigma[k] = vec3(0.0);
+    }
+
+    // Cuadrante 0
+    for (int j = -KERNEL_SIZE; j &lt;= 0; j++)
+    for (int i = -KERNEL_SIZE; i &lt;= 0; i++) {
+        vec3 c = texture(iChannel0, uv + vec2(float(i), float(j)) * texel).rgb;
+        mean[0] += c; sigma[0] += c * c;
+    }
+    // Cuadrante 1
+    for (int j = -KERNEL_SIZE; j &lt;= 0; j++)
+    for (int i = 0; i &lt;= KERNEL_SIZE; i++) {
+        vec3 c = texture(iChannel0, uv + vec2(float(i), float(j)) * texel).rgb;
+        mean[1] += c; sigma[1] += c * c;
+    }
+    // Cuadrante 2
+    for (int j = 0; j &lt;= KERNEL_SIZE; j++)
+    for (int i = -KERNEL_SIZE; i &lt;= 0; i++) {
+        vec3 c = texture(iChannel0, uv + vec2(float(i), float(j)) * texel).rgb;
+        mean[2] += c; sigma[2] += c * c;
+    }
+    // Cuadrante 3
+    for (int j = 0; j &lt;= KERNEL_SIZE; j++)
+    for (int i = 0; i &lt;= KERNEL_SIZE; i++) {
+        vec3 c = texture(iChannel0, uv + vec2(float(i), float(j)) * texel).rgb;
+        mean[3] += c; sigma[3] += c * c;
+    }
+
+    float min_sigma = 1e8;
+    vec3 result = vec3(0.0);
+    for (int k = 0; k &lt; 4; k++) {
+        mean[k] /= n;
+        vec3 s = abs(sigma[k] / n - mean[k] * mean[k]);
+        float val = s.x + s.y + s.z;
+        if (val &lt; min_sigma) { min_sigma = val; result = mean[k]; }
+    }
+
+    // Ruido tipo vibración
+    vec2 noiseUV = uv * iResolution.xy * 0.8;
+    float noise = fract(sin(dot(noiseUV, vec2(12.9898, 78.233))) * 43758.5453);
+    noise = noise * 2.0 - 1.0;
+    result += noise * VIBRATION;
+
+    // Bloom simple
+    vec3 bloom = vec3(0.0);
+    float samples = 0.0;
+    for (float bj = -3.0; bj &lt;= 3.0; bj++)
+    for (float bi = -3.0; bi &lt;= 3.0; bi++) {
+        vec2 offset = vec2(bi, bj) * texel * 4.0;
+        vec3 s = texture(iChannel0, uv + offset).rgb;
+        float b = dot(s, vec3(0.299, 0.587, 0.114));
+        bloom += s * smoothstep(0.6, 1.0, b);
+        samples += 1.0;
+    }
+    bloom /= samples;
+    result += bloom * BLOOM_STRENGTH;
+
+    fragColor = vec4(result, 1.0);
+}</code>
+      </div>
+      <div class="img-block">
+        <img src="imgs/londonshader.png" alt="Resultado en Shadertoy" style="width:100%;display:block;"/>
+        <div class="img-caption">Resultado en Shadertoy</div>
+      </div>
+      <div class="img-block">
+        <img src="imgs/london.png" alt="Imagen original" style="width:100%;display:block;"/>
+        <div class="img-caption">Original</div>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="section reveal">
+      <div class="section-label">05 — Los toques finales</div>
+      <h2 class="section-title">Vibración de color <em>y un poco de bloom.</em></h2>
+      <p>El estilo Kuwahara no era suficiente porque solo simplifica y suaviza colores. No agrega textura, dirección de pincelada ni irregularidad natural. Reduce detalle, pero no introduce gesto ni energía visual. El resultado se veía como una foto filtrada, no como una pintura real.</p>
+      <p>Además a esto agregamos un poquito de ruido estático a cada píxel:</p>
+      <div class="code-block">
+        <code>// Vibración de color — noise estático por píxel
+vec2 noiseUV = fragCoord * 0.8;
+float noise = fract(sin(dot(noiseUV, vec2(12.9898, 78.233))) * 43758.5453);
+noise = noise * 2.0 - 1.0;
+float vibration = 0.04;
+result += noise * vibration;</code>
+      </div>
+      <div class="callout">
+        <p><strong>¿Qué hace este ruido y por qué funciona?</strong><br/>
+        Kuwahara suaviza mucho. Eso puede hacer que todo se vea plano y artificial. El ruido introduce micro-variaciones, como el grano de la pintura.</p>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="section reveal">
+      <div class="section-label">06 — En Godot</div>
+      <h2 class="section-title">Portarlo a Godot <em>fue más fácil de lo esperado.</em></h2>
+      <p>Las principales diferencias entre Godot y GLSL puro (para Shadertoy) son:</p>
+      <div class="callout">
+        <p><strong>GDShader (Godot)</strong><br/>
+        Se integra al motor Godot · Tiene variables propias (<em>SCREEN_UV</em>, <em>COLOR</em>, etc.) · Funciona dentro del pipeline del engine · Más práctico para juegos</p>
+      </div>
+      <div class="callout">
+        <p><strong>ShaderToy (GLSL)</strong><br/>
+        Es GLSL casi puro · Usa <em>mainImage</em>, <em>iResolution</em>, <em>iChannel0</em> · Es más experimental · Ideal para prototipos y efectos visuales</p>
+      </div>
+      <p>Con esta estructura de escena y un mundo 3D de ejemplo logramos tener el shader funcionando en tiempo real.</p>
+      <div class="img-block">
+        <img src="imgs/godot-scene.png" alt="Estructura de escena en Godot" style="width:100%;display:block;"/>
+        <div class="img-caption">La estructura de escena</div>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="section reveal">
+      <div class="section-label">07 — Lo que me llevo</div>
+      <h2 class="section-title">Aprendí a hacer shaders. <em>Y otras cosas.</em></h2>
+      <p>Después de pasar por esto y aprender que se puede hacer bastante arte con matemáticas, mi forma de ver el mundo cambió.</p>
+      <p>Ahora sigue tratar de hacer un juego con esto, a ver si termino construyendo algo bonito.</p>
+      <div class="post-quote">
+        <p>Quería un filtro impresionista. Terminé aprendiendo a mirar la luz.</p>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- ═══════════ ENGLISH ═══════════ -->
+  <article id="lang-en">
+
+    <!-- 01 -->
+    <div class="section reveal">
+      <div class="section-label">01 — The origin</div>
+      <h2 class="section-title">Why on earth <em>did I want to do this?</em></h2>
+      <p>One day, looking for inspiration to create new games, I came across a game called <strong>A Short Hike</strong> and its art style really stuck with me. It's a 3D world with a pixelated shader on top and I thought: WOW, what is this? How is it made? So I started researching.</p>
+      <p>The only shaders I knew were Minecraft shaders, which most people know as a way to modify Minecraft to add visual effects — usually realistic ones, though there are others that go in different directions.</p>
+      <p>While researching I discovered what became my shader bible: <strong>The Book of Shaders</strong> by Patricio Gonzalez Vivo and Jen Lowe. Then I asked myself: what artistic style would be interesting in a video game? That's when the idea of imitating <strong>Claude Monet</strong> came to me.</p>
+      <p>When I was a kid, my parents bought art magazines that came with the newspaper. One of them was about Monet. I was completely fascinated by his work, which is why I chose him over any other style.</p>
+      <div class="img-block">
+        <img src="imgs/shortlike.png" alt="A Short Hike" style="width:100%;display:block;"/>
+        <div class="img-caption">A Short Hike — visual inspiration</div>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="section reveal">
+      <div class="section-label">02 — Studying Monet</div>
+      <h2 class="section-title">Before the code, <em>the paintings.</em></h2>
+      <p>The first thing I noticed in Monet's paintings were the water reflections in <em>Bathers at La Grenouillère</em>. They're beautiful. The way he could capture people with so few brush strokes is remarkable.</p>
+      <div class="img-block">
+        <img src="imgs/monet1.png" alt="La Grenouillère" style="width:100%;display:block;"/>
+        <div class="img-caption">La Grenouillère, 1869 — Claude Monet</div>
+      </div>
+      <p>Another thing I found fascinating was the way Monet paints clouds. These elements absolutely had to make it into the game.</p>
+      <div class="img-block">
+        <img src="imgs/monet2.png" alt="Woman with a Parasol" style="width:100%;display:block;"/>
+        <div class="img-caption">Woman with a Parasol — Madame Monet and Her Son, 1875 — Claude Monet</div>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="section reveal">
+      <div class="section-label">03 — First shaders</div>
+      <h2 class="section-title">My first shader <em>was a blue rectangle.</em></h2>
+      <p>My first experience coding shaders (GLSL) was on <strong>thebookofshaders.com</strong>. The "Hello World" looked something like this:</p>
+      <div class="code-block">
+        <code>#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform float u_time;
+
+void main() {
+    gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0);
+}</code>
+      </div>
+      <p>This script paints every pixel of the object with a solid color. You can run it on <strong>shadertoy.com</strong>, a GLSL visualizer.</p>
+      <p>Learning from the book, I ran into a lot of advanced math I had to study. Things finally clicked when I managed to animate a red-to-black gradient using the sine function over time to smoothly oscillate values between 0 and 1.</p>
+      <div class="callout">
+        <p>By far the most confusing part was when we started using matrices in GLSL. I really should have paid more attention in class, lol. <em>(bait)</em></p>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="section reveal">
+      <div class="section-label">04 — The algorithm</div>
+      <h2 class="section-title">The Kuwahara filter, <em>or how to paint without painting.</em></h2>
+      <p>The Kuwahara filter smooths uniform areas without destroying edges. For each pixel it follows 4 steps:</p>
+      <div class="callout">
+        <p>1. Look at a square region around the pixel.<br/>
+        2. Divide that square into 4 quadrants.<br/>
+        3. Find which quadrant is most "uniform" (most similar colors).<br/>
+        4. Pick that quadrant and use its average color.</p>
+      </div>
+      <p>This algorithm helps transform any image into something resembling a Monet painting, because it mimics how the human eye simplifies a scene — not just how a photo looks. Impressionist painting is precisely that: <strong>controlled simplification</strong>.</p>
+      <p>Here's the final code for Shadertoy:</p>
+      <div class="code-block">
+        <code>#define KERNEL_SIZE 5
+#define VIBRATION 0.04
+#define BLOOM_STRENGTH 0.15
+
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
+{
+    // ... (same as Spanish version above)
+    fragColor = vec4(result, 1.0);
+}</code>
+      </div>
+      <div class="img-block">
+        <img src="imgs/londonshader.png" alt="Result in Shadertoy" style="width:100%;display:block;"/>
+        <div class="img-caption">Result in Shadertoy</div>
+      </div>
+      <div class="img-block">
+        <img src="imgs/london.png" alt="Original image" style="width:100%;display:block;"/>
+        <div class="img-caption">Original</div>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="section reveal">
+      <div class="section-label">05 — Final touches</div>
+      <h2 class="section-title">Color vibration <em>and a little bloom.</em></h2>
+      <p>Kuwahara alone wasn't enough — it only simplifies and smooths colors. It doesn't add texture, brushstroke direction, or natural irregularity. It reduces detail but doesn't introduce gesture or visual energy. The result looked like a filtered photo, not a real painting.</p>
+      <p>So I added a tiny bit of static noise to each pixel:</p>
+      <div class="code-block">
+        <code>// Color vibration — static noise per pixel
+vec2 noiseUV = fragCoord * 0.8;
+float noise = fract(sin(dot(noiseUV, vec2(12.9898, 78.233))) * 43758.5453);
+noise = noise * 2.0 - 1.0;
+float vibration = 0.04;
+result += noise * vibration;</code>
+      </div>
+      <div class="callout">
+        <p><strong>What does this noise do and why does it work?</strong><br/>
+        Kuwahara smooths so much that everything can look flat and artificial. The noise introduces micro-variations, like the grain of paint on canvas.</p>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="section reveal">
+      <div class="section-label">06 — In Godot</div>
+      <h2 class="section-title">Porting to Godot <em>was easier than expected.</em></h2>
+      <p>The main differences between Godot shaders and raw GLSL (Shadertoy) are:</p>
+      <div class="callout">
+        <p><strong>GDShader (Godot)</strong><br/>
+        Integrates into the Godot engine · Has built-in variables (<em>SCREEN_UV</em>, <em>COLOR</em>, etc.) · Works inside the engine pipeline · More practical for games</p>
+      </div>
+      <div class="callout">
+        <p><strong>ShaderToy (GLSL)</strong><br/>
+        Almost pure GLSL · Uses <em>mainImage</em>, <em>iResolution</em>, <em>iChannel0</em> · More experimental · Ideal for prototypes and visual effects</p>
+      </div>
+      <p>With this scene structure and a sample 3D world, we got the shader running in real time.</p>
+      <div class="img-block">
+        <img src="imgs/godot-scene.png" alt="Godot scene structure" style="width:100%;display:block;"/>
+        <div class="img-caption">The scene structure</div>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="section reveal">
+      <div class="section-label">07 — What I take away</div>
+      <h2 class="section-title">I learned to write shaders. <em>And other things.</em></h2>
+      <p>After going through all this and discovering that you can create real art with mathematics, the way I see the world changed.</p>
+      <p>Now comes the next challenge: trying to build an actual game with all of this, and see if I can make something beautiful.</p>
+      <div class="post-quote">
+        <p>I wanted an impressionist filter. I ended up learning to see light.</p>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- POST NAV -->
+  <div class="post-nav">
+    <a class="post-nav-back" href="blog.html">← Volver a Notas</a>
+    <span class="post-nav-info">001 / Feb 2026</span>
   </div>
-  <div class="about-r reveal">
-    <div>
-      <p class="about-body">
-        TinyField es un <strong>viaje de calma y descubrimiento personal.</strong> Deja atrás la ciudad para construir una vida sencilla en el campo, cultivar y crear vínculos en un entorno natural procedural.
-      </p>
-      <p class="about-body">
-        No hay enemigos ni peligro real, solo ciclos naturales, relaciones, estaciones y crecimiento interior. <strong>El objetivo no es sobrevivir, sino florecer.</strong>
-      </p>
-    </div>
-  </div>
-</section>
 
-<!-- INFO GRID -->
-<section class="info-grid-section reveal">
-  <div class="info-grid">
-    <div class="info-item">
-      <h4>Plataforma</h4>
-      <p>Mobile, PC, Switch</p>
-    </div>
-    <div class="info-item">
-      <h4>Género</h4>
-      <p>Cozy Survival</p>
-    </div>
-    <div class="info-item">
-      <h4>Jugadores</h4>
-      <p>1 Jugador</p>
-    </div>
-    <div class="info-item">
-      <h4>Estado</h4>
-      <p>En Desarrollo</p>
-    </div>
-  </div>
-</section>
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 Vicho Studio</span>
+    <span class="f-c">Nota 001</span>
+    <span class="f-r">Todos los derechos reservados</span>
+  </footer>
 
-<!-- CTA -->
-<section class="cta-section reveal">
-  <h2 class="cta-title">Juega<br><em>TinyField</em></h2>
-  <a href="tinyfield/tinyfield.html" class="btn-solid">Jugar ahora</a>
-</section>
+  <script>
+    // Cursor
+    const dot = document.getElementById('cur-dot');
+    const ring = document.getElementById('cur-ring');
+    document.addEventListener('mousemove', e => {
+      dot.style.left = e.clientX + 'px';
+      dot.style.top = e.clientY + 'px';
+      ring.style.left = e.clientX + 'px';
+      ring.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('big'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('big'));
+    });
 
-<!-- FOOTER -->
-<footer>
-  <span>© 2026 Vicho Studio</span>
-  <span class="f-r">Todos los derechos reservados</span>
-</footer>
+    // Theme
+    const btn = document.getElementById('themeBtn');
+    btn.addEventListener('click', () => {
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      document.documentElement.setAttribute('data-theme', dark ? '' : 'dark');
+      btn.textContent = dark ? '● Dark' : '○ Light';
+    });
 
-<script src="js/main.js"></script>
+    // Lang toggle
+    function setLang(lang, el) {
+      document.querySelectorAll('article').forEach(a => a.classList.remove('visible'));
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('lang-' + lang).classList.add('visible');
+      el.classList.add('active');
+    }
+
+    // Reveal on scroll
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
 </body>
 </html>
