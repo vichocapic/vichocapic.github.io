@@ -1,76 +1,32 @@
-/* ═══════════════════════════════════════════════════════════════
-   VICHO STUDIO - MAIN SCRIPTS
-   Shared functionality across all pages
-   ═══════════════════════════════════════════════════════════════ */
-
-/* ─────────────────────────────────────────
-   THEME TOGGLE
-───────────────────────────────────────── */
-const root = document.documentElement;
+// theme toggle
 const themeBtn = document.getElementById('themeBtn');
-const savedTheme = localStorage.getItem('vs-theme') || 'light';
+const html = document.documentElement;
 
-// Set initial theme
-setTheme(savedTheme);
-
-// Toggle theme on button click
-themeBtn.addEventListener('click', () => {
-  const currentTheme = root.getAttribute('data-theme');
-  setTheme(currentTheme === 'light' ? 'dark' : 'light');
-});
-
-function setTheme(theme) {
-  root.setAttribute('data-theme', theme);
-  localStorage.setItem('vs-theme', theme);
-  themeBtn.textContent = theme === 'light' ? '● Dark' : '○ Light';
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+  html.dataset.theme = savedTheme;
+  updateThemeBtn(savedTheme);
 }
 
-/* ─────────────────────────────────────────
-   CUSTOM CURSOR
-───────────────────────────────────────── */
-const cursorDot = document.getElementById('cur-dot');
-const cursorRing = document.getElementById('cur-ring');
-let mouseX = -100;
-let mouseY = -100;
-let ringX = -100;
-let ringY = -100;
-
-// Track mouse position
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  cursorDot.style.left = mouseX + 'px';
-  cursorDot.style.top = mouseY + 'px';
+themeBtn?.addEventListener('click', () => {
+  const current = html.dataset.theme || 'light';
+  const next = current === 'light' ? 'dark' : 'light';
+  html.dataset.theme = next;
+  localStorage.setItem('theme', next);
+  updateThemeBtn(next);
 });
 
-// Expand cursor ring on hover over interactive elements
-document.querySelectorAll('a, button').forEach((el) => {
-  el.addEventListener('mouseenter', () => cursorRing.classList.add('big'));
-  el.addEventListener('mouseleave', () => cursorRing.classList.remove('big'));
+function updateThemeBtn(theme) {
+  if (themeBtn) {
+    themeBtn.textContent = theme === 'dark' ? '◐' : '◑';
+  }
+}
+
+// smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(anchor.getAttribute('href'));
+    target?.scrollIntoView({ behavior: 'smooth' });
+  });
 });
-
-// Smooth follow animation for cursor ring
-(function animateCursor() {
-  ringX += (mouseX - ringX) * 0.1;
-  ringY += (mouseY - ringY) * 0.1;
-  cursorRing.style.left = ringX + 'px';
-  cursorRing.style.top = ringY + 'px';
-  requestAnimationFrame(animateCursor);
-})();
-
-/* ─────────────────────────────────────────
-   SCROLL REVEAL
-───────────────────────────────────────── */
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.07 }
-);
-
-document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
