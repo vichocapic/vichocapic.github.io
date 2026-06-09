@@ -1,0 +1,263 @@
+:root {
+    --bg: #141414;
+    --text: #c7c7c7;
+    --text-muted: #8D8989;
+    --border: #2a2a2a;
+}   
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Google Sans Flex", sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+header {
+    padding-top: 32px;
+    padding-left: 48px;
+}
+nav {
+    display: flex;
+    align-items: center;
+    gap: 82px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 82px;
+}
+
+.nav-logo {
+    width: 20px;
+    height: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 20px;
+    font-weight: 400;
+}
+
+nav a:hover {
+    opacity: .7;
+}
+
+/* =========================
+   GENERAL
+========================= */
+
+section {
+    padding: 72px 24px;
+}
+
+.container {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+p {
+    font-size: 16px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+#home {
+    min-height: 75vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 584px;
+}
+.hero-content p {
+    font-size: 32px;
+    line-height: 1.2;
+}
+
+.hero-content h1 {
+    margin-bottom: 12px;
+}
+
+.hero-content p {
+    margin-bottom: 24px;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.btn {
+    text-decoration: none;
+    color: var(--text);
+
+    border: 1px solid #c7c7c7;
+
+    padding: 10px 18px;
+    border-radius: 999px;
+
+    transition: 0.2s ease;
+}
+
+.btn-primary {
+    background: #c7c7c7;
+    color: #141414;
+    border-color: #c7c7c7;
+}
+
+.btn-primary:hover {
+    background: #a8a8a8;
+    border-color: #a8a8a8;
+}
+
+.btn-primary:active {
+    background: #8a8a8a;
+    border-color: #8a8a8a;
+}
+
+.logo {
+    width: 300px;
+    margin-top: 50px;
+}
+
+/* =========================
+   ABOUT / GAMES / CONTACT
+========================= */
+
+.content-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.content-row p {
+    flex: 1;
+}
+
+.profile-pic,
+.rotking-logo,
+.contact-icon {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+
+    padding: 48px 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.socials {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icon {
+    width: 20px;
+    height: 20px;
+}
+
+
+footer p {
+    font-size: 14px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 600px) {
+
+    header {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    nav {
+        gap: 16px;
+    }
+
+    nav ul {
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    .hero-content p {
+        font-size: 22px;
+    }
+
+    .logo {
+        width: 180px;
+    }
+
+    .profile-pic,
+    .rotking-logo,
+    .contact-icon {
+        width: 90px;
+        height: 90px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+
+    footer {
+        padding: 32px 24px;
+    }
+}
