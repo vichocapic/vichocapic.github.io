@@ -6,44 +6,68 @@
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
-    <title>Vazort Games</title>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <title>Tempera - Vichovis Games</title>
 </head>
 <body>
     <header>
         <nav>
             <img
                 src="assets/Images/Polygon 1.png"
-                alt="Vazort Logo"
+                alt="Vichovis Logo"
                 class="nav-logo">
             <ul>
+                <li><a href="#tempera">Tempera</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#games">Games</a></li>
                 <li><a href="blog/index.html">Blog</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
+    <canvas id="triangles-canvas"></canvas>
     <main>
 
         <section id="home">
             <div class="hero-content">
-                <h1>Vazort Games</h1>
-                <p>
-                    Building games for people who should<br>
-                    be sleeping
-                </p>
+                <h1 class="hero-title">temperA</h1>
                 <div class="hero-buttons">
-                    <a href="#games" class="btn btn-primary">View Games</a>
-                    <a href="#contact" class="btn">Get In Touch</a>
+                    <a href="#tempera" class="btn btn-primary">Play Now</a>
+                    <a href="#trailer" class="btn">Trailer</a>
                 </div>
-                <img
-                    src="assets/Images/Logo.png"
-                    alt="Vazort Games Logo"
-                    class="logo">
             </div>
         </section>
         
+        <section id="trailer">
+            <div class="container">
+                <h2>Trailer</h2>
+                <video controls width="100%">
+                    <source src="assets/Images/trailer.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+
+        <section id="tempera">
+            <div class="container">
+                <h2>Tempera</h2>
+                <div class="content-row">
+                    <img
+                        src="assets/Images/Tempera logo.png"
+                        alt="Tempera Logo"
+                        class="tempera-logo">
+                    <p>
+                        Tempera is a short, arcade game about motion, clarity,
+                        and the little philosophical glitches we call "problems."
+
+                        <br><br>
+
+                        You play as a simple triangle.<br>
+                        The world throws other triangles at you.<br>
+                        Your only task: move.
+                    </p>
+                </div>
+            </div>
+        </section>
+
         <section id="about">
             <div class="container">
                 <h2>About Me</h2>
@@ -66,7 +90,7 @@
             </div>
         </section>
 
-        <section id="games">
+        <!-- <section id="games">
             <div class="container">
                 <h2>My Current Games</h2>
                 <div class="content-row">
@@ -82,7 +106,7 @@
                     </p>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <section id="contact">
             <div class="container">
@@ -105,22 +129,119 @@
 
     </main>
     <footer>
-        <a href="https://github.com/vichocapic">
+        <a href="https://github.com/vichovis">
             <img
                 src="assets/Images/GitHub_Invertocat_White 1.png"
                 alt="GitHub"
                 class="social-icon">
         </a>
 
-            <p>@vichocapic</p>
+            <p>@vichovis</p>
 
-        <a href="https://vichocapic.itch.io">
+        <a href="https://vichovis.itch.io">
             <img
                 src="assets/Images/itchio-logo-textless-white 1.png"
                 alt="Itch.io"
                 class="social-icon">
         </a>
     </footer>
+
+<script>
+    const canvas = document.getElementById('triangles-canvas');
+    const ctx = canvas.getContext('2d');
+    let triangles = [];
+    let animId;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    class Triangle {
+        constructor() {
+            this.reset();
+        }
+
+        reset() {
+            const size = 20 + Math.random() * 60;
+            const cx = Math.random() * canvas.width;
+            const cy = Math.random() * canvas.height;
+            this.angle = Math.random() * Math.PI * 2;
+            this.rotSpeed = (Math.random() - 0.5) * 0.02;
+            this.driftSpeed = 0.1 + Math.random() * 0.3;
+            this.driftAngle = Math.random() * Math.PI * 2;
+            this.opacity = 0.03 + Math.random() * 0.08;
+            this.vertices = [
+                { x: cx, y: cy - size },
+                { x: cx - size * 0.866, y: cy + size * 0.5 },
+                { x: cx + size * 0.866, y: cy + size * 0.5 },
+            ];
+            this.cx = cx;
+            this.cy = cy;
+        }
+
+        update() {
+            this.angle += this.rotSpeed;
+            this.cx += Math.cos(this.driftAngle) * this.driftSpeed;
+            this.cy += Math.sin(this.driftAngle) * this.driftSpeed;
+
+            const margin = 100;
+            if (this.cx < -margin || this.cx > canvas.width + margin ||
+                this.cy < -margin || this.cy > canvas.height + margin) {
+                this.reset();
+            }
+        }
+
+        draw() {
+            const cos = Math.cos(this.angle);
+            const sin = Math.sin(this.angle);
+            const cx = this.cx, cy = this.cy;
+
+            ctx.beginPath();
+            for (let i = 0; i < 3; i++) {
+                const v = this.vertices[i];
+                const dx = v.x - cx;
+                const dy = v.y - cy;
+                const rx = dx * cos - dy * sin + cx;
+                const ry = dx * sin + dy * cos + cy;
+                i === 0 ? ctx.moveTo(rx, ry) : ctx.lineTo(rx, ry);
+            }
+            ctx.closePath();
+            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+            ctx.fill();
+        }
+    }
+
+    function init() {
+        resize();
+        const count = Math.min(20, Math.max(8, Math.floor(canvas.width * canvas.height / 25000)));
+        triangles = Array.from({ length: count }, () => new Triangle());
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (const t of triangles) {
+            t.update();
+            t.draw();
+        }
+        animId = requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const oldW = canvas.width, oldH = canvas.height;
+            resize();
+            if (canvas.width > oldW || canvas.height > oldH) {
+                init();
+            }
+        }, 200);
+    });
+</script>
 
 </body>
 </html>
